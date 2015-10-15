@@ -17,11 +17,12 @@ while $waiting; do
     echo "Waiting for container..."
     waiting=false
     sleep 5
+    docker ps | grep wrapped_kansha > /dev/null || exit 1
     docker exec wrapped_kansha ls /tmp/kansha/kansha.ready 2> /dev/null || waiting=true
 done
 
 # Extract boards
-boards=`docker exec wrapped_kansha sh -c "/opt/stackless/bin/nagare-admin batch kansha /tmp/perceptual/get_boards.py"`
+boards=`docker exec wrapped_kansha sh -c "/opt/stackless/bin/nagare-admin batch kansha /tmp/perceptual/get_boards.py" | grep board | sed -e 's/board = \(.*\)/\1/'`
 echo "Found boards: $boards"
 
 # Do the actual capture
