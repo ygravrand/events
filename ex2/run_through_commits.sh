@@ -26,9 +26,9 @@ do
 
     dir="diffs_${i}_$COMMIT"
     echo "Capturing to $dir"
+    mkdir -p $dir && git --git-dir=$PROJECT_ROOT/.git --work-tree=$PROJECT_ROOT log --oneline -n 1 > $dir/gitlog.txt
     $CAPTURE_SCRIPT $dir
     retval=$?
-    mkdir -p $dir && git --git-dir=$PROJECT_ROOT/.git --work-tree=$PROJECT_ROOT log --oneline -n 1 > $dir/gitlog.txt
 
     if [ $retval -eq 0 ]
     then
