@@ -1,4 +1,4 @@
 *.png
 *.yaml
 kansha
-run_*
+diffs_*
