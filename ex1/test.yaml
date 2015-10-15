@@ -1,0 +1,27 @@
+# (tests/test.yaml)
+# This is run once before any individual test.
+# It's a good place to start your demo server.
+setup: |
+    echo dummy
+
+# This runs after the setup script and before any tests are run.
+# It's a great place to wait for server startup.
+waitFor:
+    url: https://twitter.com/pyconfr
+
+tests:
+  - name: twitter_pyconfr
+    url: https://twitter.com/pyconfr
+    config:
+       viewportSize:
+           width: 1024
+           height: 768
+
+  - name: twitter_pyconfr_mobile
+    url: https://twitter.com/pyconfr
+    config:
+      viewportSize:
+        width: 320
+        height: 768
+      # Twitter puts a min-width on regular user agents, so emulate mobile a little bit
+      userAgent: iPhone
