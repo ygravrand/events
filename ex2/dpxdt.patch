@@ -1,0 +1,23 @@
+diff --git a/dpxdt/tools/local_pdiff.py b/dpxdt/tools/local_pdiff.py
+index 952bb3f..a70c6e9 100755
+--- a/dpxdt/tools/local_pdiff.py
++++ b/dpxdt/tools/local_pdiff.py
+@@ -239,7 +239,8 @@ class CaptureAndDiffWorkflowItem(workers.WorkflowItem):
+                 print '  Diff: %s' % self.maybe_imgur(diff_path)
+ 
+                 # convenience line for copy/pasting
+-                print ' (all): %s/{%s}' % (
++                print ' all %s: %s/{%s}' % (
++                        name,
+                         os.path.dirname(output_path),
+                         ','.join(map(os.path.basename,
+                             [ref_resized_path, output_path, diff_path])))
+@@ -339,7 +340,7 @@ class WaitForUrlWorkflowItem(workers.WorkflowItem):
+ 
+         try:
+             url = waitfor['url']
+-            r = requests.head(url, allow_redirects=True)
++            r = requests.get(url, allow_redirects=True)
+             if r.status_code != 200:
+                 yield heartbeat('Request for %s failed (%d)' % (url, r.status_code))
+                 raise NotReadyError()

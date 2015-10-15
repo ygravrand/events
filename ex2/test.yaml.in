@@ -1,0 +1,142 @@
+# (tests/test.yaml)
+# This is run once before any individual test.
+# It's a good place to start your demo server.
+setup:
+    echo dummy
+
+# This runs after the setup script and before any tests are run.
+# It's a great place to wait for server startup.
+waitFor:
+    url: http://kansha:8080/
+    timeout_secs: 20
+
+tests:
+  - name: board_desktop
+    url: http://kansha:8080/Welcome+Board+User1/%board?__ac_name=user1&__ac_password=password
+    config:
+       viewportSize:
+           width: 1200
+           height: 800
+       injectCss: |
+            body {
+              background-color: white;
+            }
+  - name: board_tablet
+    url: http://kansha:8080/Welcome+Board+User1/%board?__ac_name=user1&__ac_password=password
+    config:
+       viewportSize:
+           width: 600
+           height: 800
+       injectCss: |
+            body {
+              background-color: white;
+            }
+  - name: board_mobile
+    url: http://kansha:8080/Welcome+Board+User1/%board?__ac_name=user1&__ac_password=password
+    config:
+       viewportSize:
+           width: 400
+           height: 800
+       injectCss: |
+            body {
+              background-color: white;
+            }
+  - name: calendar_desktop
+    url: http://kansha:8080/Welcome+Board+User1/%board?__ac_name=user1&__ac_password=password
+    config:
+       viewportSize:
+           width: 1200
+           height: 800
+       injectCss: |
+            body {
+              background-color: white;
+            }
+       injectJs: |
+            // See http://stackoverflow.com/questions/15739263/phantomjs-click-an-element
+            if (window._phantom) {
+              // Patch since PhantomJS does not implement click() on HTMLElement. In some
+              // cases we need to execute the native click on an element. However, jQuery's
+              // $.fn.click() does not dispatch to the native function on <a> elements, so we
+              // can't use it in our implementations: $el[0].click() to correctly dispatch.
+              if (!HTMLElement.prototype.click) {
+                HTMLElement.prototype.click = function() {
+                  var ev = document.createEvent('MouseEvent');
+                  ev.initMouseEvent(
+                      'click',
+                      /*bubble*/true, /*cancelable*/true,
+                      window, null,
+                      0, 0, 0, 0, /*coordinates*/
+                      false, false, false, false, /*modifier keys*/
+                      0/*button=left*/, null
+                  );
+                  this.dispatchEvent(ev);
+                };
+              }
+            }
+            document.querySelector('a[title="Calendar mode"]').click();
+  - name: calendar_tablet
+    url: http://kansha:8080/Welcome+Board+User1/%board?__ac_name=user1&__ac_password=password
+    config:
+       viewportSize:
+           width: 600
+           height: 800
+       injectCss: |
+            body {
+              background-color: white;
+            }
+       injectJs: |
+            // See http://stackoverflow.com/questions/15739263/phantomjs-click-an-element
+            if (window._phantom) {
+              // Patch since PhantomJS does not implement click() on HTMLElement. In some
+              // cases we need to execute the native click on an element. However, jQuery's
+              // $.fn.click() does not dispatch to the native function on <a> elements, so we
+              // can't use it in our implementations: $el[0].click() to correctly dispatch.
+              if (!HTMLElement.prototype.click) {
+                HTMLElement.prototype.click = function() {
+                  var ev = document.createEvent('MouseEvent');
+                  ev.initMouseEvent(
+                      'click',
+                      /*bubble*/true, /*cancelable*/true,
+                      window, null,
+                      0, 0, 0, 0, /*coordinates*/
+                      false, false, false, false, /*modifier keys*/
+                      0/*button=left*/, null
+                  );
+                  this.dispatchEvent(ev);
+                };
+              }
+            }
+            document.querySelector('a[title="Calendar mode"]').click();
+  - name: calendar_mobile
+    url: http://kansha:8080/Welcome+Board+User1/%board?__ac_name=user1&__ac_password=password
+    config:
+       viewportSize:
+           width: 400
+           height: 800
+       injectCss: |
+            body {
+              background-color: white;
+            }
+       injectJs: |
+            // See http://stackoverflow.com/questions/15739263/phantomjs-click-an-element
+            if (window._phantom) {
+              // Patch since PhantomJS does not implement click() on HTMLElement. In some
+              // cases we need to execute the native click on an element. However, jQuery's
+              // $.fn.click() does not dispatch to the native function on <a> elements, so we
+              // can't use it in our implementations: $el[0].click() to correctly dispatch.
+              if (!HTMLElement.prototype.click) {
+                HTMLElement.prototype.click = function() {
+                  var ev = document.createEvent('MouseEvent');
+                  ev.initMouseEvent(
+                      'click',
+                      /*bubble*/true, /*cancelable*/true,
+                      window, null,
+                      0, 0, 0, 0, /*coordinates*/
+                      false, false, false, false, /*modifier keys*/
+                      0/*button=left*/, null
+                  );
+                  this.dispatchEvent(ev);
+                };
+              }
+            }
+            document.querySelector('a[title="Calendar mode"]').click();
