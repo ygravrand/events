@@ -1,0 +1,26 @@
+# This is run once before any individual test.
+# It's a good place to start your demo server.
+setup: |
+    echo dummy
+
+# This runs after the setup script and before any tests are run.
+# It's a great place to wait for server startup.
+waitFor:
+    url: http://www.meetup.com/fr-FR/rennes-devops/events/229098910/
+
+tests:
+  - name: meetup
+    url: http://www.meetup.com/fr-FR/rennes-devops/events/229098910/
+    config:
+       viewportSize:
+           width: 1024
+           height: 768
+
+  - name: meetup_mobile
+    url: http://www.meetup.com/fr-FR/rennes-devops/events/229098910/
+    config:
+      viewportSize:
+        width: 320
+        height: 768
+      # Emulate mobile even more
+      userAgent: iPhone
