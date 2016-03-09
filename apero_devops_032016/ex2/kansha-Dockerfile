@@ -1,0 +1,7 @@
+FROM netng/kansha:v1.0.5
+
+ADD kansha_entrypoint.sh /
+
+EXPOSE 8080
+
+ENTRYPOINT ["/kansha_entrypoint.sh"]
