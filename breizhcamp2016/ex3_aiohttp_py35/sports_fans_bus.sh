@@ -17,4 +17,4 @@ function get_host_and_port() {
 
 HOST_AND_PORT=$(get_host_and_port 'ex3_aiohttp_py35' 8000)
 echo $HOST_AND_PORT
-ab -n 100 -c 50 http://$HOST_AND_PORT/
+ab -n 50 -c 50 http://$HOST_AND_PORT/

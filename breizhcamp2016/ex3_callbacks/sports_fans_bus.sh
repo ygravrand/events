@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ulimit -n 10000
-
 function get_host_and_port() {
     DOCKER_CONTAINER=$1
     PORT_IN_CONTAINER=$2
@@ -17,6 +15,6 @@ function get_host_and_port() {
     echo $RES
 }
 
-HOST_AND_PORT=$(get_host_and_port 'ex4_gevent' 8000)
+HOST_AND_PORT=$(get_host_and_port 'ex3_callbacks' 5000)
 echo $HOST_AND_PORT
-ab -n 10000 -c 2500 http://$HOST_AND_PORT/
+ab -n 50 -c 50 http://$HOST_AND_PORT/
